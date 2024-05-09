@@ -115,7 +115,7 @@
             $lastCalculation = end($_SESSION['history']);
             echo '<form action="" method="post">';
             echo '<input type="hidden" name="lastCalculation" value="' . htmlspecialchars($lastCalculation) . '">';
-            echo '<button type="submit" name="retrieve">Recuperar Último Cálculo</button>';
+           echo '<button type="submit" name="retrieve"><Strong>Recuperar Último Cálculo</Strong></button>';
             echo '</form>';
         }
     ?>
