@@ -69,8 +69,10 @@
             <option value="-">-</option>
             <option value="*">*</option>
             <option value="/">/</option>
+            <option value="!">n!</option>
+            <option value="^">x^y</option>
         </select>
-        <input type="text" name="num2" placeholder="Digite o segundo número" value="<?php echo isset($_POST['lastCalculation']) ? explode(' ', $_POST['lastCalculation'])[2] : ''; ?>" required>
+        <input type="text" name="num2" placeholder="Digite o segundo número" value="<?php echo isset($_POST['lastCalculation']) ? explode(' ', $_POST['lastCalculation'])[2] : ''; ?>">
         <button type="submit" name="calculate"><Strong>Calcular</Strong></button>
     </form>
 
@@ -90,8 +92,19 @@
                     } else {
                         return $num1 / $num2;
                     }
+                case '!':
+                    $result = 1;
+                    for ($i = 1; $i <= $num1; $i++) {
+                        $result *= $i;
+                    }
+                    return $result;
+                case '^':
+                    return pow($num1, $num2);
+                default:
+                    return "Operação inválida";
             }
         }
+
 
         if (isset($_POST['calculate'])) {
             $num1 = $_POST['num1'];
@@ -115,7 +128,7 @@
             $lastCalculation = end($_SESSION['history']);
             echo '<form action="" method="post">';
             echo '<input type="hidden" name="lastCalculation" value="' . htmlspecialchars($lastCalculation) . '">';
-           echo '<button type="submit" name="retrieve"><Strong>Recuperar Último Cálculo</Strong></button>';
+            echo '<button type="submit" name="retrieve"><Strong>Recuperar Último Cálculo</Strong></button>';
             echo '</form>';
         }
     ?>
